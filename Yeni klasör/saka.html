@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sürpriz Hediye!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Başlangıçtaki sahte buton ekranı */
+        #click-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        /* Şaka Ekranı */
+        #joke-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        #joke-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Resmi bozmadan ekrana sığdırır */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tarayıcıların ses engelini aşmak için ilk başta çıkacak sahte ekran -->
+    <div id="click-screen">
+        <h2>Sana bir mesaj var!</h2>
+        <p>Görmek için aşağıdaki butona tıkla.</p>
+        <button class="btn" onclick="sakaYap()">Mesajı Aç</button>
+    </div>
+
+    <!-- Şakanın patladığı ekran -->
+    <div id="joke-screen">
+        <img src="recep.gif" alt="Recep Ivedik">
+    </div>
+
+    <!-- Arkada çalacak ses -->
+    <audio id="ses" src="gulme.mp3" preload="auto"></audio>
+
+    <script>
+        function sakaYap() {
+            // İlk ekranı gizle
+            document.getElementById('click-screen').style.display = 'none';
+            
+            // Şaka ekranını göster
+            document.getElementById('joke-screen').style.display = 'flex';
+            
+            // Sesi oynat
+            var ses = document.getElementById('ses');
+            ses.play().catch(function(error) {
+                console.log("Ses oynatılamadı, tarayıcı engellemiş olabilir:", error);
+            });
+        }
+    </script>
+</body>
+</html>
